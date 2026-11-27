@@ -1,43 +1,53 @@
-# Edisi Dunia — Thursday, 26 November 2026
+# Edisi Dunia — the world of Thursday 26 November 2026, on one page
 
-[![make.fun bounty](https://img.shields.io/badge/make.fun-bounty-blue)](https://make.fun/bounty/news-image-20261126)
-[![rank](https://img.shields.io/badge/dynamic/json?url=https://make.fun/api/competitions/news-image-20261126&query=$.rank&label=rank)](https://make.fun/bounty/news-image-20261126)
-[![reward](https://img.shields.io/badge/reward-$100-green)](https://make.fun/bounty/news-image-20261126)
+[![make.fun · news-image-20261126](https://make.fun/badge/news-image-20261126.svg)](https://make.fun/bounty/news-image-20261126?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261126)
+[![rank](https://make.fun/badge/news-image-20261126/kazamisao/news-image-20261126/rank.svg)](https://make.fun/bounty/news-image-20261126/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261126)
+[![reward](https://make.fun/badge/news-image-20261126/kazamisao/news-image-20261126/reward.svg)](https://make.fun/bounty/news-image-20261126?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261126)
 
-Entry for the make.fun competition **news-image-20261126**: one image that
-sums up the world's news of Thursday 26 November 2026.
+This repository is an entry to the make.fun competition
+[news-image-20261126](https://make.fun/bounty/news-image-20261126): a
+single image that sums up the world's news of Thursday 26 November
+2026.
 
-## What the page carries
+## What is on the page
 
-- **Lead — Space:** the FCC green-lit SpaceX to deploy up to one million
-  satellites for its Starmind orbital data-centre network.
-- **Business:** Elon Musk pledged two SpaceX shares for every US child, a
-  plan valued at more than $18 billion.
-- **Middle East:** an Iranian drone strike's debris killed two Italian
-  citizens in Kuwait.
-- **Egypt:** the Cairo fuel-tanker fire death toll rose to 31; the driver
-  was detained.
-- **Markets:** the Bank of Korea hiked 25bp to 3.25%; S&P put Nvidia on
-  CreditWatch Negative; thin Thanksgiving trade in the US.
-- **Also:** Houthis hit Saudi Arabia's Jazan refinery; 13 died in an
-  Indonesia gold-mine flood.
+- **Lead, space:** the US Federal Communications Commission cleared
+  SpaceX to deploy up to one million satellites for its Starmind
+  orbital data-centre network — the first approval of its kind.
+- **Business:** Elon Musk pledged two SpaceX shares for every American
+  child, one from the company and one from himself, a plan valued at
+  more than $18 billion.
+- **Middle East:** debris from an Iranian drone strike killed two
+  Italian citizens in Kuwait.
+- **Egypt:** the death toll from the Cairo fuel-tanker fire rose to
+  31, and the driver was detained.
+- **Markets:** the Bank of Korea raised its rate by 25bp to 3.25% on a
+  chip-driven boom; S&P placed Nvidia on CreditWatch Negative; US
+  trading was thin for Thanksgiving (Dow +0.33%, Nasdaq −0.62%).
+- **Also:** Houthis struck Saudi Arabia's Jazan refinery, and thirteen
+  people died in an Indonesian gold-mine flood.
 
-Every story was reported on 26 November 2026 and cross-checked across at
-least two independent outlets before it was set on the page.
+Each story was reported on 26 November 2026 and was cross-checked
+against at least two independent outlets before it was set in type.
 
-## How it is built
+## How it works
 
-`make_image.sh` composes the 1024x1024 front page with ffmpeg's drawtext
-and drawbox filters (no PIL on the build machine); each line of text lives
-in its own textfile so nothing is garbled by escaping. `main.py` is the
-submitted program: in the grader's sandbox (Python 3.13, standard library
-only, no network, read-only repository) it copies the committed
-`entry.png` to `$MAKEFUN_OUTPUT_DIR/entry.png`, byte for byte.
+`main.py` is the submitted program. The sandbox that runs it has no
+network and a read-only checkout, so the program simply copies the
+committed `entry.png` into `$MAKEFUN_OUTPUT_DIR` (falling back to
+`/output`), byte for byte.
 
-## Checks
+The page itself is typeset by `make_image.sh`: ffmpeg draws a
+1024×1024 paper-coloured canvas with drawbox rules and drawtext lines,
+each line kept in its own text file so no escaping can corrupt it.
+Lines carrying a percent sign are drawn with text expansion off.
 
-`python3 test_entry.py` verifies the image is a 1024x1024 PNG and that
-`main.py`, run with the grader's `-P -s` flags, copies it byte-identical.
+## Checking it
+
+    python3 test_entry.py
+
+confirms the picture is a 1024×1024 PNG and that the program, run with
+the grader's `-P -s` flags, delivers it unchanged, twice in a row.
 
 ## License
 

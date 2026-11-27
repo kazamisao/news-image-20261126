@@ -1,6 +1,6 @@
-"""Checks for the news-image-20261126 entry.
+"""Tests for the news-image-20261126 entry.
 
-Run with: python3 -m pytest test_entry.py -q   (or plain python3 test_entry.py)
+Plain-python runner: python3 test_entry.py
 """
 
 import os
@@ -9,36 +9,47 @@ import subprocess
 import sys
 import tempfile
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.abspath(__file__))
+PNG = os.path.join(ROOT, "entry.png")
+PROGRAM = os.path.join(ROOT, "main.py")
 
 
-def png_size(path):
-    with open(path, "rb") as fh:
-        head = fh.read(24)
-    assert head[:8] == b"\x89PNG\r\n\x1a\n", "entry.png is not a PNG"
-    width, height = struct.unpack(">II", head[16:24])
-    return width, height
+def dimensions(path):
+    with open(path, "rb") as handle:
+        header = handle.read(24)
+    if header[:8] != b"\x89PNG\r\n\x1a\n":
+        raise AssertionError("entry.png does not start with the PNG signature")
+    return struct.unpack(">II", header[16:24])
 
 
-def test_image_is_square_1024():
-    assert png_size(os.path.join(HERE, "entry.png")) == (1024, 1024)
+def run_program(out_dir):
+    env = dict(os.environ)
+    env["MAKEFUN_OUTPUT_DIR"] = out_dir
+    done = subprocess.run(
+        [sys.executable, "-P", "-s", PROGRAM],
+        env=env, capture_output=True, text=True, timeout=60,
+    )
+    if done.returncode != 0:
+        raise AssertionError(f"program failed: {done.stderr}")
 
 
-def test_main_copies_image_byte_identical():
-    with tempfile.TemporaryDirectory() as tmp:
-        env = dict(os.environ, MAKEFUN_OUTPUT_DIR=tmp)
-        run = subprocess.run([sys.executable, "-P", "-s",
-                              os.path.join(HERE, "main.py")],
-                             env=env, capture_output=True, text=True)
-        assert run.returncode == 0, run.stderr
-        with open(os.path.join(HERE, "entry.png"), "rb") as fh:
-            original = fh.read()
-        with open(os.path.join(tmp, "entry.png"), "rb") as fh:
-            copied = fh.read()
-        assert copied == original
+def check_canvas():
+    if dimensions(PNG) != (1024, 1024):
+        raise AssertionError("the front page must be 1024 by 1024")
+
+
+def check_copy_is_exact_and_repeatable():
+    with open(PNG, "rb") as handle:
+        wanted = handle.read()
+    for _ in range(2):
+        with tempfile.TemporaryDirectory() as tmp:
+            run_program(tmp)
+            with open(os.path.join(tmp, "entry.png"), "rb") as handle:
+                if handle.read() != wanted:
+                    raise AssertionError("the delivered picture differs")
 
 
 if __name__ == "__main__":
-    test_image_is_square_1024()
-    test_main_copies_image_byte_identical()
+    check_canvas()
+    check_copy_is_exact_and_repeatable()
     print("all tests passed")
