@@ -145,7 +145,7 @@ DT "$BOLD" 15 "$ACCENT" 534 756 mk_kicker
 DT "$BOLD" 25 "$INK" 534 780 mk_h1
 DT "$BOLD" 25 "$INK" 534 812 mk_h2
 DT "$SANS" 17 "$INK" 534 852 mk_b1
-DT "$SANS" 17 "$INK" 534 879 mk_b2
+DTN "$SANS" 17 "$INK" 534 879 mk_b2
 DT "$SANS" 17 "$INK" 534 906 mk_b3
 DT "$SANS" 17 "$INK" 534 933 mk_b4
 DTN "$SANS" 17 "$INK" 534 960 mk_b5
