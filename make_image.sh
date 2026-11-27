@@ -132,28 +132,28 @@ T also "ALSO - HOUTHIS HIT SAUDI JAZAN REFINERY; 13 DIE IN INDONESIA MINE FLOOD"
 T footer "All stories as reported on 26 November 2026"
 
 # Row 2: two columns with a vertical divider
-DB 510 758 2 150
+DB 510 758 2 200
 DT "$BOLD" 15 "$ACCENT" 40 756 eg_kicker
 DT "$BOLD" 25 "$INK" 40 780 eg_h1
 DT "$BOLD" 25 "$INK" 40 812 eg_h2
-DT "$SANS" 17 "$INK" 40 852 eg_b1
-DT "$SANS" 17 "$INK" 40 879 eg_b2
-DT "$SANS" 17 "$INK" 40 906 eg_b3
-DT "$SANS" 17 "$INK" 40 933 eg_b4
+DT "$SANS" 17 "$INK" 40 848 eg_b1
+DT "$SANS" 17 "$INK" 40 874 eg_b2
+DT "$SANS" 17 "$INK" 40 900 eg_b3
+DT "$SANS" 17 "$INK" 40 926 eg_b4
 
 DT "$BOLD" 15 "$ACCENT" 534 756 mk_kicker
 DT "$BOLD" 25 "$INK" 534 780 mk_h1
 DT "$BOLD" 25 "$INK" 534 812 mk_h2
-DT "$SANS" 17 "$INK" 534 852 mk_b1
-DTN "$SANS" 17 "$INK" 534 879 mk_b2
-DT "$SANS" 17 "$INK" 534 906 mk_b3
-DT "$SANS" 17 "$INK" 534 933 mk_b4
-DTN "$SANS" 17 "$INK" 534 960 mk_b5
+DT "$SANS" 17 "$INK" 534 848 mk_b1
+DTN "$SANS" 17 "$INK" 534 874 mk_b2
+DT "$SANS" 17 "$INK" 534 900 mk_b3
+DT "$SANS" 17 "$INK" 534 926 mk_b4
+DTN "$SANS" 17 "$INK" 534 952 mk_b5
 
 # Also band and footer
-DB 40 968 944 3
-DT "$BOLD" 19 "$INK" 40 978 also
-DT "$SANS" 13 "$INK" "(w-text_w)/2" 1006 footer
+DB 40 972 944 3
+DT "$BOLD" 19 "$INK" 40 982 also
+DT "$SANS" 13 "$INK" "(w-text_w)/2" 1009 footer
 
 # Render: one still image from a solid paper-coloured canvas.
 F=${F%,}
